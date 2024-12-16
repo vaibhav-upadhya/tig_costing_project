@@ -1,0 +1,169 @@
+{% comment %} <!-- add_costing.html -->
+<form method="POST">
+    {% csrf_token %}
+    
+    <!-- Department Dropdown -->
+    <label for="id_department">Select Department:</label>
+    <select name="department" id="department" required>
+        <option value="">Select Department</option>
+        {% for department in departments %}
+            <option value="{{ department.id }}" {% if department.id == form.department.value %}selected{% endif %}>{{ department.name }}</option>
+        {% endfor %}
+    </select>
+
+    <!-- Expense Head Dropdown -->
+    <label for="id_expense_head">Select Expense Head:</label>
+    <select name="expense_head" id="expense_head" required>
+        <option value="">Select Expense Head</option>
+    </select>
+
+    <!-- Expense Field Dropdown -->
+    <label for="id_expense_field">Select Expense Field:</label>
+    <select name="expense_field" id="expense_field" required>
+        <option value="">Select Expense Field</option>
+    </select>
+
+    <!-- Month Dropdown -->
+    <label for="id_month">Select Month:</label>
+    {{ form.month }}
+
+    <!-- Year Input -->
+    <label for="id_year">Enter Year:</label>
+    <input type="number" name="year" value="{{ form.year.value }}" required>
+
+    <!-- Cost Input -->
+    <label for="id_cost">Enter Cost:</label>
+    <input type="number" name="cost" step="0.01" value="{{ form.cost.value }}" required>
+
+    <button type="submit">Submit</button>
+</form>
+
+<script>
+    // Load Expense Heads dynamically based on selected Department
+    document.getElementById('department').addEventListener('change', function() {
+        const departmentId = this.value;
+        fetch(`/load-expense-heads/?department=${departmentId}`)
+            .then(response => response.json())
+            .then(data => {
+                const expenseHeadSelect = document.getElementById('expense_head');
+                expenseHeadSelect.innerHTML = '<option value="">Select Expense Head</option>';
+                data.expense_heads.forEach(expenseHead => {
+                    const option = document.createElement('option');
+                    option.value = expenseHead.id;
+                    option.textContent = expenseHead.name;
+                    expenseHeadSelect.appendChild(option);
+                });
+            });
+    });
+
+    // Load Expense Fields dynamically based on selected Expense Head
+    document.getElementById('expense_head').addEventListener('change', function() {
+        const expenseHeadId = this.value;
+        fetch(`/load-expense-fields/?expense_head=${expenseHeadId}`)
+            .then(response => response.json())
+            .then(data => {
+                const expenseFieldSelect = document.getElementById('expense_field');
+                expenseFieldSelect.innerHTML = '<option value="">Select Expense Field</option>';
+                data.expense_fields.forEach(expenseField => {
+                    const option = document.createElement('option');
+                    option.value = expenseField.id;
+                    option.textContent = expenseField.name;
+                    expenseFieldSelect.appendChild(option);
+                });
+            });
+    });
+</script> {% endcomment %}
+
+{% comment %} for testing purpose forms  {% endcomment %}
+
+{% comment %} <form method="POST">
+    {% csrf_token %}
+    
+    <label for="department">Select Department:</label>
+    <select name="department" id="department" required>
+        <option value="">Select Department</option>
+        {% for department in departments %}
+            <option value="{{ department.id }}" {% if department.id == form.department.value %}selected{% endif %}>{{ department.name }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="expense_head">Select Expense Head:</label>
+    <select name="expense_head" id="expense_head" required>
+        <option value="">Select Expense Head</option>
+        {% for expense_head in expense_heads %}
+            <option value="{{ expense_head.id }}" {% if expense_head.id == form.expense_head.value %}selected{% endif %}>{{ expense_head.name }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="expense_field">Select Expense Field:</label>
+    <select name="expense_field" id="expense_field" required>
+        <option value="">Select Expense Field</option>
+        {% for field in expense_fields %}
+            <option value="{{ field.id }}" {% if field.id == form.expense_field.value %}selected{% endif %}>{{ field.name }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="month">Select Month:</label>
+    <select name="month" id="month" required>
+        <option value="">Select Month</option>
+        {% for month, month_name in form.month.choices %}
+            <option value="{{ month }}" {% if month == form.month.value %}selected{% endif %}>{{ month_name }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="year">Enter Year:</label>
+    <input type="number" name="year" id="year" required value="2025" placeholder="Enter Year">
+
+    <label for="cost">Enter Cost:</label>
+    <input type="number" name="cost" id="cost" required step="0.01" placeholder="Enter Cost">
+
+    <button type="submit">Submit</button>
+</form> {% endcomment %}
+
+{% comment %} 
+NEONE TEATING  {% endcomment %}
+
+<form method="POST">
+    {% csrf_token %}
+
+    <label for="department">Select Department:</label>
+    <select name="department" id="department" required>
+        {% for department in departments %}
+            <option value="{{ department.id }}">{{ department.name }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="expense_head">Expense Head:</label>
+    <select name="expense_head" id="expense_head">
+        <option value="">Select an Expense Head</option>
+        {% for head in expense_heads %}
+            <option value="{{ head.id }}">{{ head.name }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="expense_field">Expense Field:</label>
+    <select name="expense_field" id="expense_field">
+        <option value="">Select an Expense Field</option>
+        {% for field in expense_fields %}
+            <option value="{{ field.id }}">{{ field.name }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="month">Select Month:</label>
+    <select name="month" required>
+        {% for key, name in form.fields.month.choices %}
+            <option value="{{ key }}">{{ name }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="year">Enter Year:</label>
+    <input type="number" name="year" value="2025" required>
+
+    <label for="cost">Enter Cost:</label>
+    <input type="text" name="cost" required>
+
+    <button type="submit">Submit</button>
+</form>
+
+
+

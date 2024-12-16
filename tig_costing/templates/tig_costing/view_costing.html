@@ -1,0 +1,65 @@
+<h1>Costing for {{ expense_head.name }}</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    <label for="department">Select Department:</label>
+    <select name="department" id="department" required>
+        {% for department in departments %}
+            <option value="{{ department.id }}">{{ department.name }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="expense_head">Expense Head:</label>
+    <select name="expense_head" id="expense_head" required>
+        {% for head in expense_heads %}
+            <option value="{{ head.id }}" {% if head.id == expense_head.id %}selected{% endif %}>{{ head.name }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="expense_field">Expense Field:</label>
+    <select name="expense_field" id="expense_field" required>
+        {% for field in expense_fields %}
+            <option value="{{ field.id }}">{{ field.name }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="month">Select Month:</label>
+    <select name="month" required>
+        <option value="">Select Month</option>
+        {% for month, month_name in form.month.choices %}
+            <option value="{{ month }}" {% if month == form.month.value %}selected{% endif %}>{{ month_name }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="year">Enter Year:</label>
+    <input type="number" name="year" value="2025" required>
+
+    <label for="cost">Enter Cost:</label>
+    <input type="text" name="cost" required>
+
+    <button type="submit">Submit</button>
+</form>
+
+<h2>Costing Details:</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Department</th>
+            <th>Jan'25</th>
+            <th>Feb'25</th>
+            <th>Mar'25</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for department, months in expenses[expense_head.name]["Departments"].items %}
+            <tr>
+                <td>{{ department }}</td>
+                <td>{{ months["Jan'25"] }}</td>
+                <td>{{ months["Feb'25"] }}</td>
+                <td>{{ months["Mar'25"] }}</td>
+                <td>{{ months["Total"] }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
