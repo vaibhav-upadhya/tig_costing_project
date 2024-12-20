@@ -1,154 +1,19 @@
+{% load static %}
+{% load custom_filters %}
 <!DOCTYPE html>
 <html lang="en">
-
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Expense Tracker</title>
-    <style>
-    body {
-    margin: 0;
-    overflow-x: hidden;
-}
-
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Nunito', sans-serif;
-}
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background: #ffffff;
-    box-shadow: 0px 4px 4px 0px #00000040;
-    height: 4.5em;
-    position: fixed;
-    width: 100%;
-    z-index: 1000;
-}
-
-.tig_logo {
-    width: 5em;
-    margin-left: 1em;
-    min-width: 0;
-}
-
-.main_content {
-    padding-top: 5em;
-    padding-inline: 1rem;
-}
-
-.table-container {
-    position: relative;
-    overflow-y: auto;
-    /* overflow-x: hidden; */
-    height: calc(100vh - 5.5em);
-}
-
-table {
-    border-collapse: separate;
-    border-spacing: 0;
-    width: 100%;
-    border-radius: 5px;
-}
-
-
-thead {
-    position: sticky;
-    top: 0;
-    background: #D7D5EE;
-    color:  #1520A6; 
-    z-index: 1; 
-}
-
-/* Create separation between thead and tbody */
-tbody {
-    position: relative;
-}
-
-tbody::before {
-    content: '';
-    display: block;
-    height: 0rem; /* Adjust as needed for separation */
-    background-color: #f9f9f9; /* Match the background of the gap */
-    width: 100%;
-}
-
-th, td {
-    border: 1px solid #0000004D;
-    padding-inline: 0.25rem;
-    text-align: left;
-    white-space: nowrap;
-    height: 2rem;
-    padding-block: 0.25rem;
-}
-
-tbody tr {
-    background-color: #fff;
-}
-.button_text_td{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.25rem;
-}
-.disp_none{
-    display: none;
-}
-.add_rotation{
-    transform: rotate(180deg);
-    transform-origin: center
-}
-.button_group{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.width_5{
-    width: 6%; 
-}
-.input_field_for_costing{
-    height: 100%;
-    border: none;
-    width: 100%;
-}
-.padding_0{
-    padding: 0;
-}
-.input_field_for_costing:focus{
-    outline: none;
-}
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    appearance: none;
-    margin: 0;
-}
-.input_field_for_costing{
-    height: 100%;
-    width: 84%;
-}
-.input_field_for_costing:focus{
-    outline: none;
-}
-.disp_flex{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-    </style>
+    <link rel="stylesheet" href="{% static "tig_costing/css/test.css" %}">
 </head>
 <body>
     <header class="header">
         <div>
-            <img src="logo.png" loading="lazy" alt="tig_logo" class="tig_logo">
+            <img src="{% static "tig_costing/images/logo.png" %}" loading="lazy" alt="tig_logo" class="tig_logo">
         </div>
-
+ 
     </header>
     <main class="main_content">
         <section class="content">
@@ -157,773 +22,311 @@ input[type="number"]::-webkit-outer-spin-button {
                     <thead>
                         <tr>
                             <th>Expense Head</th>
-                            <th>Department </th>
-                            <th>Jan'25</th>
-                            <th>Feb'25</th>
-                            <th>Mar'25</th>
-                            <th>Apr'25</th>
-                            <th>May'25</th>
-                            <th>Jun'25</th>
-                            <th>Jul'25</th>
-                            <th>Aug'25</th>
-                            <th>Sept'25</th>
-                            <th>Oct'25</th>
-                            <th>Nov'25</th>
-                            <th>Dec'25</th>
+                            <th>Department</th>
+                            {% for month in months %}
+                                <th>{{ month }}</th>
+                            {% endfor %}
                             <th>Total</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Bank Charges</td>
-                            <td>Finance</td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td></td>  
-                        </tr>
-                        <tr>
-                            <td>Business Development</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>Sales</td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>PPG</td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Consulting And Accounting</td>
-                            <td>Finance</td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Credit Funding Cost</td>
-                            <td>Finance</td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Domain, Email And Website</td>
-                            <td>IT</td>
-                            <td><input class="input_field_for_costing" type="number" name="" id="" value=""1234"></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Electricity</td>
-                            <td>Admin</td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Employee Engagement</td>
-                            <td>HR</td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Employee Insurance</td>
-                            <td>HR</td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Freight And Courier</td>
-                            <td>Admin</td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Insurance</td>
-                            <td>Admin</td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Legal And Professional Exps</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>Finance</td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>Legal</td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Marketing Expenses</td>
-                            <td>Marketing</td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Recruitment Expenses</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>HR</td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>BUHR</td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Rent</td>
-                            <td>Admin</td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Repairs and Maintenance</td>
-                            <td>Admin</td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Salary And Wages</td>
-                            <td>HR</td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Subscription</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>IT Related Subscription</td>
-                            <td>IT</td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Finance Related Subscription</td>
-                            <td>Finance</td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Marketing Related Subscription</td>
-                            <td>Marketing</td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Others</td>
-                            <td>Other Department</td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Telephone And Internet</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Internet Expenses</td>
-                            <td>IT</td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Telephone Expenses</td>
-                            <td>Admin</td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Training and Development</td>
-                            <td>HR</td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td><input class="input_field_for_costing" type="number" name="" id=""></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Travel Expenses</td>
-                            <td>All Departments</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Total</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
+                        {% for expense_head, data in costing_structure.items %}
+                            {% if not data.multiple_departments %}
+                                {% for department, values in data.items %}
+                                    {% if department != "multiple_departments" %}
+                                        <tr expense-field>
+                                            <td>{{ expense_head }}</td>
+                                            <td>{{ department }}</td>
+                                            {% for month in months %}
+                                                <td>                                                    
+                                                    <input class="input_field_for_costing" type="number" value="{{ values|key:month }}">
+                                                </td>
+                                            {% endfor %}
+                                            <td></td>
+                                        </tr>
+                   
+                                        {% for nested_expense_name, nested_values in values.items %}
+                                            {% if nested_expense_name != "multiple_departments" %}
+                                                <tr>
+                                                    <td></td>  <!-- Nested Data -->
+                                                    <td>{{ nested_expense_name }}</td>
+                                                    {% for month in months %}
+                                                        <td>
+                                                            <input class="input_field_for_costing" type="number" value="{{ nested_values|key:month }}">
+                                                        </td>
+                                                    {% endfor %}
+                                                    <td></td>
+                                                </tr>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td>{{ expense_head }}</td>
+                                    <td></td>
+                                    {% for month in months %}
+                                        <td></td>
+                                    {% endfor %}
+                                    <td></td>
+                                </tr>
+                               
+                                {% for department, values in data.items %}
+                                    {% if department != "multiple_departments" %}
+                                        <tr expense-field>
+                                            <td></td>
+                                            <td>{{ department }}</td>
+                                            {% for month in months %}
+                                                <td>
+                                                    <input class="input_field_for_costing" type="number" value="{{ values|key:month }}">
+                                                </td>
+                                            {% endfor %}
+                                            <td></td>
+                                        </tr>
+                   
+                                        {% for nested_expense_name, nested_values in values.items %}
+                                            {% if nested_expense_name != "multiple_departments" %}
+                                                <tr>
+                                                    <td></td>  <!-- Nested Data -->
+                                                    <td>{{ nested_expense_name }}</td>
+                                                    {% for month in months %}
+                                                        <td>
+                                                            <input class="input_field_for_costing" type="number" value="{{ nested_values|key:month }}">
+                                                        </td>
+                                                    {% endfor %}
+                                                    <td></td>
+                                                </tr>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>  
                 </table>
             </div>
         </section>
     </main>
-
-<script>
-    const rows = document.querySelectorAll("tbody tr");
-let col1GlobalValue = "";
-
-
-// Adding the "add button" in each department with expense_head and department data
-rows.forEach(row => {
-    const firstCol = row.querySelector("td:nth-child(1)");
-    const innerHTMLValueCol1 = firstCol ? firstCol.innerHTML.trim() : "";
-    const secondTd = row.querySelector("td:nth-child(2)");
-    const innerHTMLValueCol2 = secondTd ? secondTd.innerHTML.trim() : "";
-
-    if (secondTd && innerHTMLValueCol2) {
-        secondTd.classList.add("button_text_td");
-        secondTd.innerHTML += `<span class="button_group">                     
-                                    <img this_is="accordion" class="disp_none" idToTargetRows="${innerHTMLValueCol1 ? `${innerHTMLValueCol1}_${innerHTMLValueCol2}` : `${col1GlobalValue}_${innerHTMLValueCol2}`}" src="arrowUpNDown.svg" alt="^">
-                                    <img this_is="addButton" id="${innerHTMLValueCol1 ? `${innerHTMLValueCol1}_${innerHTMLValueCol2}` : `${col1GlobalValue}_${innerHTMLValueCol2}`}" src="addButton.svg" alt="+">
-                                </span>`;
-    }
-    if (innerHTMLValueCol1) {
-        col1GlobalValue = innerHTMLValueCol1;
-    }
-});
-
-// Select all add buttons for event listener
-const buttonImages = document.querySelectorAll('img[this_is="addButton"]');
-const generalCaseColumn = `<td></td>
-                    <td class="padding_0 disp_flex">
-                        <input expense-name class="input_field_for_costing" type="text" name="" id="">
-                        <img expense-remove src="minus-circle.svg" alt="-" > 
-                    </td>`
-const travelExpenseColumn = `<td></td>
-                    <td class="padding_0 disp_flex">
-                                <select expense-name class="input_field_for_costing"  name="" id="">
-                                    <option value="">-----</option>
-                                    <option value="IT">IT</option>
-                                    <option value="Marketing">Marketing</option>
-                                    <option value="Delivery">Delivery</option>
-                                    <option value="Finance">Finance</option>
-                                </select>
-                        <img expense-remove src="minus-circle.svg" alt="-" > 
-                    </td>`
-const insertedRowsColumn =`
-                    <td class="padding_0"><input class="input_field_for_costing" type="number" name="" id=""></td>
-                    <td class="padding_0"><input class="input_field_for_costing" type="number" name="" id=""></td>
-                    <td class="padding_0"><input class="input_field_for_costing" type="number" name="" id=""></td>
-                    <td class="padding_0"><input class="input_field_for_costing" type="number" name="" id=""></td>
-                    <td class="padding_0"><input class="input_field_for_costing" type="number" name="" id=""></td>
-                    <td class="padding_0"><input class="input_field_for_costing" type="number" name="" id=""></td>
-                    <td class="padding_0"><input class="input_field_for_costing" type="number" name="" id=""></td>
-                    <td class="padding_0"><input class="input_field_for_costing" type="number" name="" id=""></td>
-                    <td class="padding_0"><input class="input_field_for_costing" type="number" name="" id=""></td>
-                    <td class="padding_0"><input class="input_field_for_costing" type="number" name="" id=""></td>
-                    <td class="padding_0"><input class="input_field_for_costing" type="number" name="" id=""></td>
-                    <td></td>`;
-
-// Global array to store all `expense-name` inputs
-const allExpenseNameInputs = [];
-
-
-// Adding click event listener to each add button
-buttonImages.forEach(button => {
-    let lastInsertedRow = null; // Variable to keep track of the most recently added row
-    let counter = 0;
-    button.addEventListener('click', (event) => {
-        const closestRow = event.target.closest('tr');
-        const idOfClickedButton = event.target.id; // Get the ID of the clicked button
-
-        // To display svg when row is added
-        const closestSvg = closestRow.querySelector(`img[idToTargetRows="${idOfClickedButton}"]`);
-        if (closestSvg) {
-            closestSvg.classList.remove('disp_none');
-        }
-
-        // To insert row when the add button is clicked
-        let nextRow = null;
-        if (lastInsertedRow) {
-            nextRow = lastInsertedRow.nextElementSibling;
-        } else {
-            nextRow = closestRow.nextElementSibling;
-        }
-        const ExistingRowsWithTargetedId = document.querySelectorAll(`tr[insertedRow="${idOfClickedButton}"]`);
-        if(ExistingRowsWithTargetedId){
-            ExistingRowsWithTargetedId.forEach(row=>{
-                row.classList.remove('disp_none')
-            })
-        }
-
-        const newRow = document.createElement('tr');
-        newRow.setAttribute('insertedRow', idOfClickedButton);
-
-        newRow.innerHTML = (idOfClickedButton !== "Travel Expenses_All Departments") ? generalCaseColumn + insertedRowsColumn + `<td>${counter}</td>` : travelExpenseColumn + insertedRowsColumn + `<td>${counter}</td>`;
-
-        // Insert the new row at the appropriate position
-        if (nextRow) {
-            closestRow.parentNode.insertBefore(newRow, nextRow);
-        } else {
-            closestRow.parentNode.appendChild(newRow); // If no next sibling, just append at the end
-        }
-        
-
-         // Get the `expense-name` input from the newly inserted row and store it in the array
-        const newExpenseNameInput = newRow.querySelector('input[expense-name] , select[expense-name]');
-        if (newExpenseNameInput) {
-            allExpenseNameInputs.push(newExpenseNameInput);
-            addEventListenerToEveryExpenseInput()
-            console.log('All Expense Name Inputs:', allExpenseNameInputs); // Check the array's contents
-        }
-
-
-
-
-        // Update the lastInsertedRow to point to the newly inserted row
-        lastInsertedRow = newRow;
-        counter++;
-    });
-});
-
-// Select all accordions and add event listener for opening/closing rows
-const accordions = document.querySelectorAll('img[this_is="accordion"]');
-accordions.forEach(accordion => {
-    accordion.addEventListener('click', (event) => {
-        // Use getAttribute to access the custom attribute correctly
-        const targetedRowId = event.target.getAttribute('idToTargetRows');
-        // Ensure that the attribute value is not null/undefined
-        if (targetedRowId) {
-            accordion.classList.toggle('add_rotation');
-            const rowsWithTargetedId = document.querySelectorAll(`tr[insertedRow="${targetedRowId}"]`);
-            rowsWithTargetedId.forEach(row => {
-                row.classList.toggle('disp_none');
-            });
-            
-        } else {
-            accordion.classList.add('disp_none')
-            if(accordion.classList.contains('add_rotation')){
-                accordion.classList.remove('add_rotation')
+ 
+    <script>
+        const rows = document.querySelectorAll("tbody tr[expense-field]");
+        let col1GlobalValue = "";
+ 
+ 
+        // Adding the "add button" in each department with expense_head and department data
+        rows.forEach(row => {
+            const firstCol = row.querySelector("td:nth-child(1)");
+            const innerHTMLValueCol1 = firstCol ? firstCol.innerHTML.trim() : "";
+            const secondTd = row.querySelector("td:nth-child(2)");
+            const innerHTMLValueCol2 = secondTd ? secondTd.innerHTML.trim() : "";
+ 
+            if (secondTd && innerHTMLValueCol2) {
+                secondTd.classList.add("button_text_td");
+                secondTd.innerHTML += `<span class="button_group">                    
+                                            <img this_is="accordion" class="disp_none" idToTargetRows="${innerHTMLValueCol1 ? `${innerHTMLValueCol1}_${innerHTMLValueCol2}` : `${col1GlobalValue}_${innerHTMLValueCol2}`}" src="{% static "tig_costing/images/arrowUpNDown.svg" %}" alt="^">
+                                            <img this_is="addButton" id="${innerHTMLValueCol1 ? `${innerHTMLValueCol1}_${innerHTMLValueCol2}` : `${col1GlobalValue}_${innerHTMLValueCol2}`}" src="{% static "tig_costing/images/addButton.svg" %}" alt="+">
+                                        </span>`;
             }
-        }
-    });
-});
-
-// add with class in all th and td from 3rd child
-
-const row = document.querySelector('tr');
-const cellsFromThirdToLast = row.querySelectorAll('td:nth-child(n+3), th:nth-child(n+3)');
-cellsFromThirdToLast.forEach(cell => {
-   cell.classList.add('width_5')
-});
-
-const allInputFields = document.querySelectorAll('.input_field_for_costing')
-allInputFields.forEach(inp=>{
-    const nearestTd = inp.closest('td')
-    nearestTd.classList.add('padding_0')
-})
-
-// to manage minus sign 
-const addEventListenerToEveryExpenseInput = ()=>{
-    
-    allExpenseNameInputs.forEach(allExpenseNameInput => {
-        const nearestTd = allExpenseNameInput.closest('td');
-        const nearestTr = allExpenseNameInput.closest('tr')
-        const expenseRemove = nearestTd.querySelector('[expense-remove]');
-
-        allExpenseNameInput.addEventListener('input', () => {
-            if (allExpenseNameInput.value.trim() !== '') {
-                if (!expenseRemove.classList.contains('disp_none')) {
-                    console.log("add class disp_none")
-                    expenseRemove.classList.add('disp_none');
-                }
-            } else {
-                expenseRemove.classList.remove('disp_none');
+            if (innerHTMLValueCol1) {
+                col1GlobalValue = innerHTMLValueCol1;
             }
         });
-        if(!expenseRemove.classList.contains('disp_none')){
-            expenseRemove.addEventListener('click', ()=>{
-                nearestTr.remove()
-            })
+ 
+        // Select all add buttons for event listener
+        const buttonImages = document.querySelectorAll('img[this_is="addButton"]');
+        const generalCaseColumn = `<td></td>
+                            <td class="padding_0 disp_flex">
+                                <input expense-name class="input_field_for_costing" type="text" name="" id="">
+                                <img expense-remove src="{% static "tig_costing/images/minus-circle.svg" %}" alt="-" >
+                            </td>`
+        const travelExpenseColumn = `<td></td>
+                            <td class="padding_0 disp_flex">
+                                        <select expense-name class="input_field_for_costing"  name="" id="">
+                                            <option value="">-----</option>
+                                            <option value="IT">IT</option>
+                                            <option value="Marketing">Marketing</option>
+                                            <option value="Delivery">Delivery</option>
+                                            <option value="Finance">Finance</option>
+                                        </select>
+                                <img expense-remove src="{% static "tig_costing/images/minus-circle.svg" %}" alt="-" >
+                            </td>`
+        const insertedRowsColumn =`
+                            <td class="padding_0"><input class="input_field_for_costing" type="number" name="" id=""></td>
+                            <td class="padding_0"><input class="input_field_for_costing" type="number" name="" id=""></td>
+                            <td class="padding_0"><input class="input_field_for_costing" type="number" name="" id=""></td>
+                            <td class="padding_0"><input class="input_field_for_costing" type="number" name="" id=""></td>
+                            <td class="padding_0"><input class="input_field_for_costing" type="number" name="" id=""></td>
+                            <td class="padding_0"><input class="input_field_for_costing" type="number" name="" id=""></td>
+                            <td class="padding_0"><input class="input_field_for_costing" type="number" name="" id=""></td>
+                            <td class="padding_0"><input class="input_field_for_costing" type="number" name="" id=""></td>
+                            <td class="padding_0"><input class="input_field_for_costing" type="number" name="" id=""></td>
+                            <td class="padding_0"><input class="input_field_for_costing" type="number" name="" id=""></td>
+                            <td class="padding_0"><input class="input_field_for_costing" type="number" name="" id=""></td>
+                            <td></td>`;
+ 
+        // Global array to store all `expense-name` inputs
+        let allExpenseNameInputs = [];
+ 
+        //to find the next sibling of deleted row
+ 
+        function getNextRowWithId(currentRow) {
+            let nextRow = currentRow.nextElementSibling; // Start with the next sibling
+            while (nextRow) {
+                if (nextRow.hasAttribute('parent-table-rows')) { // Check if it has an 'id' attribute
+                    return nextRow; // Found the row with an 'id' attribute
+                }
+                nextRow = nextRow.nextElementSibling; // Move to the next sibling
+            }
+            return null; // No row with an 'id' attribute found
         }
-
-    });
-}
-
-
-</script>
+ 
+ 
+        // Adding click event listener to each add button
+        buttonImages.forEach(button => {
+            let lastInsertedRow = null; // Variable to keep track of the most recently added row
+            let counter = 0;
+            button.addEventListener('click', (event) => {
+                const closestRow = event.target.closest('tr');
+                const idOfClickedButton = event.target.id; // Get the ID of the clicked button
+ 
+                // To display svg when row is added
+                const closestSvg = closestRow.querySelector(`img[idToTargetRows="${idOfClickedButton}"]`);
+                if (closestSvg) {
+                    closestSvg.classList.remove('disp_none');
+                }
+ 
+                // To insert row when the add button is clicked
+                let nextRow = null;
+                if (lastInsertedRow) {
+                    nextRow = lastInsertedRow.nextElementSibling;
+                } else {
+                    nextRow = closestRow.nextElementSibling;
+                }
+                const ExistingRowsWithTargetedId = document.querySelectorAll(`tr[insertedRow="${idOfClickedButton}"]`);
+                if(ExistingRowsWithTargetedId){
+                    ExistingRowsWithTargetedId.forEach(row=>{
+                        row.classList.remove('disp_none')
+                    })
+                }
+ 
+                const newRow = document.createElement('tr');
+                newRow.setAttribute('insertedRow', idOfClickedButton);
+ 
+                newRow.innerHTML = (idOfClickedButton !== "Travel Expenses_All Departments") ? generalCaseColumn + insertedRowsColumn + `<td>${counter}</td>` : travelExpenseColumn + insertedRowsColumn + `<td>${counter}</td>`;
+ 
+                // Insert the new row at the appropriate position
+                if (nextRow) {
+                    closestRow.parentNode.insertBefore(newRow, nextRow);
+                } else {
+                    console.log("I rannnnnnnn")
+                    lastInsertedRow = null
+                    if (lastInsertedRow) {
+                        console.log("i have some value: ", lastInsertedRow)
+                        nextRow = lastInsertedRow.nextElementSibling;
+                        console.log(nextRow)
+                    } else {
+                        console.log("i have no value: ", lastInsertedRow, "next", closestRow.nextElementSibling )
+                        nextRow = getNextRowWithId(closestRow);
+                    }
+                    closestRow.parentNode.insertBefore(newRow, nextRow);
+                }
+               
+ 
+                // Get the `expense-name` input from the newly inserted row and store it in the array
+                const newExpenseNameInput = newRow.querySelector('input[expense-name] , select[expense-name]');
+                if (newExpenseNameInput) {
+                    allExpenseNameInputs.push(newExpenseNameInput);
+                    addEventListenerToEveryExpenseInput()
+                    // console.log('All Expense Name Inputs:', allExpenseNameInputs); // Check the array's contents
+                }
+ 
+ 
+ 
+ 
+                // Update the lastInsertedRow to point to the newly inserted row
+                lastInsertedRow = newRow;
+                counter++;
+            });
+        });
+ 
+        // Select all accordions and add event listener for opening/closing rows
+        const accordions = document.querySelectorAll('img[this_is="accordion"]');
+        accordions.forEach(accordion => {
+            accordion.addEventListener('click', (event) => {
+                // Use getAttribute to access the custom attribute correctly
+                const targetedRowId = event.target.getAttribute('idToTargetRows');
+                // Ensure that the attribute value is not null/undefined
+                if (targetedRowId) {
+                    accordion.classList.toggle('add_rotation');
+                    const rowsWithTargetedId = document.querySelectorAll(`tr[insertedRow="${targetedRowId}"]`);
+                    rowsWithTargetedId.forEach(row => {
+                        row.classList.toggle('disp_none');
+                    });
+                   
+                } else {
+                    accordion.classList.add('disp_none')
+                    if(accordion.classList.contains('add_rotation')){
+                        accordion.classList.remove('add_rotation')
+                    }
+                }
+            });
+        });
+ 
+        // add with class in all th and td from 3rd child
+ 
+        const row = document.querySelector('tr');
+        const cellsFromThirdToLast = row.querySelectorAll('td:nth-child(n+3), th:nth-child(n+3)');
+        cellsFromThirdToLast.forEach(cell => {
+        cell.classList.add('width_5')
+        });
+ 
+        const allInputFields = document.querySelectorAll('.input_field_for_costing')
+        allInputFields.forEach(inp=>{
+            const nearestTd = inp.closest('td')
+            nearestTd.classList.add('padding_0')
+        })
+ 
+        // to manage minus sign
+        const addEventListenerToEveryExpenseInput = ()=>{
+           
+            allExpenseNameInputs.forEach(allExpenseNameInput => {
+                const nearestTd = allExpenseNameInput.closest('td');
+                const nearestTr = allExpenseNameInput.closest('tr');
+                const idToFindParentTr =  nearestTr.getAttribute('insertedRow');
+                const accordionOfParentTr = document.querySelector(`img[idToTargetRows="${idToFindParentTr}"]`);
+                const parentTrOfNearestTr = accordionOfParentTr.closest('tr')
+                // console.log("parentTrOfNearestTr: ", parentTrOfNearestTr)
+                const expenseRemove = nearestTd.querySelector('[expense-remove]');
+                const nearestTrNextParentTr = getNextRowWithId(nearestTr)
+                allExpenseNameInput.addEventListener('input', () => {
+                    if (allExpenseNameInput.value.trim() !== '') {
+                        if (!expenseRemove.classList.contains('disp_none')) {
+                            console.log("add class disp_none")
+                            expenseRemove.classList.add('disp_none');
+                        }
+                    } else {
+                        expenseRemove.classList.remove('disp_none');
+                    }
+                });
+                if(!expenseRemove.classList.contains('disp_none')){
+                    expenseRemove.addEventListener('click', ()=>{
+                        nearestTr.remove()
+                        allExpenseNameInputs = allExpenseNameInputs.filter(input => input !== allExpenseNameInput);
+                        console.log(allExpenseNameInputs);
+                        if(nearestTrNextParentTr === parentTrOfNearestTr.nextElementSibling){
+                            accordionOfParentTr.classList.add('disp_none');
+                            console.log("nearest accordion ********************", accordionOfParentTr)
+                       
+                        }
+                    })
+                }
+ 
+            });
+        }
+ 
+ 
+    </script>
+ 
 </body>
 </html>
+ 

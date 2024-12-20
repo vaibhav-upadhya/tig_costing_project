@@ -52,10 +52,13 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'tig_costing_project.urls'
 
+import os
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'tig_costing/templates'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -69,6 +72,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'tig_costing_project.wsgi.application'
+
+
 
 
 # Database
@@ -117,6 +122,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'tig_costing/static'),]  # Project-level static folder
+
+
 
 APPEND_SLASH = True
 
